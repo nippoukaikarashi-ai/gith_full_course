@@ -1,23 +1,37 @@
-# month.py
-# 1から12月までの和名辞書
-jp_month = {
-    1: "睦月", 2: "如月", 4: "卯月", 3: "和月",
-    5: "皐月", 6: "水無月", 7: "文月", 8: "葉月",
-    9: "長月", 10: "神無月", 11: "霜月", 12: "師走",
-    13: "月"
-    }
+# even_odd.py (プロ版)
 
-# ユーザーから数字を入力してもらう
-# input()は文字列として受け取るので、int()で数値に変換するのがコツです
-try:
-    x = int(input("調べたい月を数字で入力してください (1-12): "))
-    
-    # 辞書にその数字（キー）があるかチェック
-    if x in jp_month:
-        print(f"{x}月の和名は「{jp_month[x]}」です。")
+def get_judge_text(num):
+    """入力された数値を判定し、履歴用の文字列を作成する"""
+    if num % 2 == 0:
+        return f"{num}(偶数)"
     else:
-        print("1から12の範囲で入力してください。")
-        
-except ValueError:
-    print("数字を入力してくださいね！")
-# 差分確認用のコメント
+        return f"{num}(奇数)"
+    
+def get_judge_text_sos(num):
+
+    return num / 2
+
+def main():
+    """メインのループ処理を行う関数"""
+    history = []
+    print("--- 判定マシン (DocString実装版) ---")
+
+    while True:
+        user_input = input("\n数字を入力 ('q'で終了): ")
+        if user_input.lower() == 'q':
+            break
+
+        try:
+            val = int(user_input)
+            result = get_judge_text_sos(val) # 関数を呼び出す
+            print(f"結果: {result}")
+            history.append(result)
+        except ValueError:
+            print("エラー: 数字を入れてね")
+
+    print("\n履歴を表示します...")
+    for h in history:
+        print(h)
+
+if __name__ == "__main__":
+    main()
